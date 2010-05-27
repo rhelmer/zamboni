@@ -73,10 +73,13 @@ automatically includes <tt class="docutils literal"><span class="pre">requiremen
 <div class="section" id="using-the-vendor-library">
 <h2>Using the vendor library<a class="headerlink" href="#using-the-vendor-library" title="Permalink to this headline">¶</a></h2>
 <p>The other method is to use the /vendor library of all packages and
-repositories.  These are maintained by Hudson in the zamboni-vendor repository.</p>
-<p>Once the zamboni-vendor repo has been downloaded to <tt class="docutils literal"><span class="pre">/vendor</span></tt>, you only need
-to install the compiled packages.  These can come from your system package
-manager or from</p>
+repositories.  These are maintained by Hudson in the zamboni-lib repository.</p>
+<p>Check out the vendor lib with</p>
+<div class="highlight-python"><pre>git clone --recursive git://github.com/jbalogh/zamboni-lib.git ./vendor</pre>
+</div>
+<p>Once the zamboni-lib repo has been downloaded to <tt class="docutils literal"><span class="pre">/vendor</span></tt>, you only need to
+install the compiled packages.  These can come from your system package manager
+or from</p>
 <div class="highlight-python"><pre>pip install -r requirements/compiled.txt</pre>
 </div>
 </div>
@@ -85,9 +88,9 @@ manager or from</p>
 <p>The vendor repo was seeded with</p>
 <div class="highlight-python"><pre>pip install --no-install --build=vendor/packages --src=vendor/src -I -r requirements/dev.txt</pre>
 </div>
-<p>Then I added everything in <tt class="docutils literal"><span class="pre">/packages</span></tt> and set up submodules in <tt class="docutils literal"><span class="pre">/src</span></tt>.
-We&#8217;ll be keeping this up to date through Hudson, but if you add new packages
-you should seed them yourself.</p>
+<p>Then I added everything in <tt class="docutils literal"><span class="pre">/packages</span></tt> and set up submodules in <tt class="docutils literal"><span class="pre">/src</span></tt> (see
+below).  We&#8217;ll be keeping this up to date through Hudson, but if you add new
+packages you should seed them yourself.</p>
 <p>If we wanted to add a new dependency called <tt class="docutils literal"><span class="pre">cheeseballs</span></tt> to zamboni, you
 would add it to <tt class="docutils literal"><span class="pre">requirements/prod.txt</span></tt> or <tt class="docutils literal"><span class="pre">requirements/dev.txt</span></tt> and then
 do</p>
@@ -102,6 +105,13 @@ dynamically add directories to <tt class="docutils literal"><span class="pre">sy
 <p><tt class="docutils literal"><span class="pre">html5lib</span></tt> and <tt class="docutils literal"><span class="pre">selenium</span></tt> are troublesome, so they need to be sourced with
 <tt class="docutils literal"><span class="pre">packages/html5lib/src</span></tt> and <tt class="docutils literal"><span class="pre">packages/selenium/src</span></tt>.  Hopefully you won&#8217;t
 hit any snags like that.</p>
+<div class="section" id="adding-submodules">
+<h3>Adding submodules<a class="headerlink" href="#adding-submodules" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>for f in src/*
+    pushd $f &gt;/dev/null &amp;&amp; REPO=$(git config remote.origin.url) &amp;&amp; popd &gt; /dev/null &amp;&amp; git submodule add $REPO $f</pre>
+</div>
+<p>Holy readability batman!</p>
+</div>
 </div>
 </div>
 
@@ -116,7 +126,10 @@ hit any snags like that.</p>
 <li><a class="reference external" href="">Packaging in Zamboni</a><ul>
 <li><a class="reference external" href="#installing-through-pip">Installing through pip</a></li>
 <li><a class="reference external" href="#using-the-vendor-library">Using the vendor library</a></li>
-<li><a class="reference external" href="#adding-new-packages">Adding new packages</a></li>
+<li><a class="reference external" href="#adding-new-packages">Adding new packages</a><ul>
+<li><a class="reference external" href="#adding-submodules">Adding submodules</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
