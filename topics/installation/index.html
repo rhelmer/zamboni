@@ -178,6 +178,20 @@ The settings template for developers, included below, is at
 <a class="reference external" href="http://github.com/jbalogh/zamboni/tree/master/docs/settings/settings_local.dev.py">docs/settings/settings_local.dev.py</a>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="o">*</span>
 
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">TEMPLATE_DEBUG</span> <span class="o">=</span> <span class="n">DEBUG</span>
+<span class="n">DEBUG_PROPAGATE_EXCEPTIONS</span> <span class="o">=</span> <span class="n">DEBUG</span>
+
+<span class="c"># These apps are great during development.</span>
+<span class="n">INSTALLED_APPS</span> <span class="o">+=</span> <span class="p">(</span>
+    <span class="s">&#39;debug_toolbar&#39;</span><span class="p">,</span>
+    <span class="s">&#39;django_extensions&#39;</span><span class="p">,</span>
+    <span class="s">&#39;fixture_magic&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">CACHE_BACKEND</span> <span class="o">=</span> <span class="s">&#39;django_pylibmc.memcached://localhost:11211?timeout=5000&#39;</span>
+<span class="c"># Uncomment to disable caching:</span>
+<span class="c"># CACHE_BACKEND = &#39;dummy://&#39;</span>
 
 <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -191,16 +205,18 @@ The settings template for developers, included below, is at
     <span class="p">},</span>
 <span class="p">}</span>
 
+
+<span class="n">LOG_LEVEL</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span>
+<span class="n">HAS_SYSLOG</span> <span class="o">=</span> <span class="bp">False</span>
+
 <span class="c"># For debug toolbar.</span>
-<span class="n">MIDDLEWARE_CLASSES</span> <span class="o">+=</span> <span class="p">(</span><span class="s">&#39;debug_toolbar.middleware.DebugToolbarMiddleware&#39;</span><span class="p">,)</span>
-<span class="n">INTERNAL_IPS</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;127.0.0.1&#39;</span><span class="p">,)</span>
-<span class="n">INSTALLED_APPS</span> <span class="o">+=</span> <span class="p">(</span><span class="s">&#39;debug_toolbar&#39;</span><span class="p">,)</span>
-
-<span class="n">CACHE_BACKEND</span> <span class="o">=</span> <span class="s">&#39;caching.backends.memcached://localhost:11211?timeout=500&#39;</span>
-
-<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
-
-<span class="n">DEBUG_PROPAGATE_EXCEPTIONS</span> <span class="o">=</span> <span class="n">DEBUG</span>
+<span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
+    <span class="n">INTERNAL_IPS</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;127.0.0.1&#39;</span><span class="p">,)</span>
+    <span class="n">MIDDLEWARE_CLASSES</span> <span class="o">+=</span> <span class="p">(</span><span class="s">&#39;debug_toolbar.middleware.DebugToolbarMiddleware&#39;</span><span class="p">,)</span>
+    <span class="n">DEBUG_TOOLBAR_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;HIDE_DJANGO_SQL&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="s">&#39;INTERCEPT_REDIRECTS&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="p">}</span>
 
 <span class="c"># If you&#39;re not running on SSL you&#39;ll want this to be False</span>
 <span class="n">SESSION_COOKIE_SECURE</span> <span class="o">=</span> <span class="bp">False</span>
