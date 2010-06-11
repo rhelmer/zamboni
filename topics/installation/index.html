@@ -64,8 +64,9 @@ Here we go!</p>
 </ul>
 </dd>
 </dl>
-<p>If you&#8217;re on a foolish Linux distro that splits all its packages into <tt class="docutils literal"><span class="pre">-dev</span></tt>
-and normal stuff, make sure you&#8217;re getting all those <tt class="docutils literal"><span class="pre">-dev</span></tt> packages too.</p>
+<p>If you&#8217;re on a Linux distro that splits all its packages into <tt class="docutils literal"><span class="pre">-dev</span></tt>
+and normal stuff, make sure you&#8217;re getting all those <tt class="docutils literal"><span class="pre">-dev</span></tt> packages too (see
+below for Ubuntu details).</p>
 <div class="section" id="use-the-source">
 <h3>Use the Source<a class="headerlink" href="#use-the-source" title="Permalink to this headline">¶</a></h3>
 <p>Grab zamboni from github with</p>
@@ -73,6 +74,17 @@ and normal stuff, make sure you&#8217;re getting all those <tt class="docutils l
 cd zamboni
 git submodule update --init</pre>
 </div>
+</div>
+</div>
+<div class="section" id="installing-packages-for-ubuntu-users">
+<h2>Installing Packages for Ubuntu users<a class="headerlink" href="#installing-packages-for-ubuntu-users" title="Permalink to this headline">¶</a></h2>
+<p>Zamboni uses many packages in production that you may or may not need depending
+on what area you are developing.  For example, if you have MySQL running on a
+separate cluster, you don&#8217;t need to install it on your development box, although
+you will need the development files.  The following command will install the
+required development files on Ubuntu or, if you&#8217;re running a recent version, you
+can <a class="reference external" href="apt:python-dev,python-virtualenv,libxml2-dev,libxslt1-dev,libmysqlclient-dev,libmemcached-dev">install them automatically</a>:</p>
+<div class="highlight-python"><pre>sudo aptitude install python-dev python-virtualenv libxml2-dev libxslt1-dev libmysqlclient-dev libmemcached-dev</pre>
 </div>
 </div>
 <div class="section" id="installing-python-for-osx-users">
@@ -267,6 +279,7 @@ have to do database migrations manually.  I hope there aren&#8217;t too many.</p
 <li><a class="reference external" href="#use-the-source">Use the Source</a></li>
 </ul>
 </li>
+<li><a class="reference external" href="#installing-packages-for-ubuntu-users">Installing Packages for Ubuntu users</a></li>
 <li><a class="reference external" href="#installing-python-for-osx-users">Installing Python for OSX users</a></li>
 <li><a class="reference external" href="#virtualenv">virtualenv</a></li>
 <li><a class="reference external" href="#virtualenvwrapper">virtualenvwrapper</a><ul>
