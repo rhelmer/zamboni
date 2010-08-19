@@ -315,6 +315,5 @@ class TestFeaturedFeed(amo.test_utils.ExtraSetup, test_utils.TestCase):
         assert item_pubdate.text == 'Tue, 17 Jan 2006 07:28:30 -0800' \
                or item_pubdate.text == 'Tue, 02 Jan 2007 16:57:55 -0800'
         item_guid = doc('rss channel item guid')[0]
-        print doc
         assert item_guid.text.endswith('/versions/1.0.42') or \
                item_guid.text.endswith('/versions/1.0.43')

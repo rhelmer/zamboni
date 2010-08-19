@@ -111,5 +111,5 @@ class FeaturedRss(Feed):
 
     def item_guid(self, addon):
         """Guid for a particuar version (<item><guid>)"""
-        return reverse('addons.versions',
-                       args=[addon.id, addon.current_version])
+        return absolutify(reverse('addons.versions',
+                          args=[addon.id, addon.current_version]))
