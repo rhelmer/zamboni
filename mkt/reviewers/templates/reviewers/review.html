@@ -18,6 +18,7 @@
     <span>{{ product.name }}</span>
   </h1>
   <p class="author">{{ _('by') }} {{ users_list(product.listed_authors) }}</p>
+  <input type="hidden" id="app_slug" value="{{ product.app_slug }}"></input>
 </header>
 
 <div id="scroll_sidebar_parent">
@@ -50,6 +51,11 @@
       <li><a href="{{ product.get_detail_url() }}" class="button">
         {{ _('View Listing') }}</a></li>
       {% if is_admin %}
+        {% if product.is_packaged %}
+        <li><a href="{{ product.get_perf_startup_url() }}"
+             id="perf_startup" class="button manage">
+          {{ _('Run Startup Tests') }}</a></li>
+        {% endif %}
         <li><a href="{{ product.get_dev_url() }}" class="button manage">
           {{ _('Edit Listing') }}</a></li>
       {% endif %}
@@ -57,6 +63,9 @@
     <strong>{{ _('Review This App') }}</strong>
     <ul>
       <li><a href="#more-about">{{ _('More Information') }}</a></li>
+      {% if product.is_packaged %}
+      <li><a href="#performance">{{ _('Performance History') }}</a></li>
+      {% endif %}
       <li><a href="#history">{{ _('App History') }}</a></li>
       <li><a href="#review-actions">{{ _('Resolution') }}</a></li>
     </ul>
@@ -72,6 +81,20 @@
     {% include 'reviewers/includes/mobile_details.html' %}
   {% endif %}
 </section>
+
+  {% if product.is_packaged %}
+  <div id="performance" class="island alpha c">
+    <h3>
+      {{ _('Performance History') }}
+    </h3>
+    <h4>
+      {{ _('Cold Load Time') }}
+    </h4>
+    <div id="perfinfo">&nbsp;</div>
+    <div id="perfwarning">&nbsp;</div>
+    <div id="perfchart"></div>
+  </div>
+  {% endif %}
 
   <div id="history" class="island alpha c">
     <div id="review-files-header">

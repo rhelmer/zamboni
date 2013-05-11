@@ -83,6 +83,10 @@ url_patterns = patterns('',
     url(r'''^performance/(?P<username>[^/<>"']+)?$''', views.performance,
         name='reviewers.performance'),
     url(r'^leaderboard/$', views.leaderboard, name='reviewers.leaderboard'),
+
+    # Performance tests
+    url('^perf/startup/%s$' % amo.APP_SLUG, views.perf_startup,
+        name='reviewers.perf_startup'),
 )
 
 api_patterns = patterns('',

@@ -2,6 +2,7 @@ import collections
 import datetime
 import json
 import os
+import requests
 import sys
 import traceback
 import urllib
@@ -870,3 +871,19 @@ def attachment(request, attachment):
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
         response['Content-Length'] = os.path.getsize(full_path)
     return response
+
+@permission_required('Apps', 'Review')
+@json_view
+def perf_startup(request, app_slug):
+    """
+    Run startup performance test for this app
+    """
+    req = requests.get(
+        settings.EDDY_URL + '/perf/status?appname=%s' % app_slug)
+    status = req.json()
+    if status['queued']:
+        return {'uuid': None}
+    else:
+        payload = {'appname': app_slug}
+        req = requests.post(settings.EDDY_URL + '/perf/startup', data=payload)
+        return {'uuid': req.text}

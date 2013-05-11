@@ -923,6 +923,9 @@ class Webapp(Addon):
         except ObjectDoesNotExist:
             return 0
 
+    def get_perf_startup_url(self, action='perf_startup'):
+        return reverse('reviewers.perf_startup', args=[self.app_slug])
+
 
 class Trending(amo.models.ModelBase):
     addon = models.ForeignKey(Addon, related_name='trending')
@@ -933,7 +936,6 @@ class Trending(amo.models.ModelBase):
     class Meta:
         db_table = 'addons_trending'
         unique_together = ('addon', 'region')
-
 
 class WebappIndexer(MappingType, Indexable):
     """

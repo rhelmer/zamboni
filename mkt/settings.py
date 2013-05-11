@@ -341,3 +341,6 @@ COMMONPLACE_REPOS = ['commbadge', 'fireplace', 'marketplace-stats',
 #   override-app-purchase
 # For them to be able purchase apps.
 PURCHASE_LIMITED = False
+
+# URL for eddy perf-testing service
+EDDY_URL = 'http://eddy.mozilla.org'
