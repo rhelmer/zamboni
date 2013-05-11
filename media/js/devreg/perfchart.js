@@ -115,7 +115,7 @@ function graph(series) {
       .attr("cy", function (d) { return y(d[1]); } )
       .attr("r", 5)
       .on("mouseover", function(d) {
-        $('#perfinfo').html(d[1] + 'ms, ' + new Date(d[0] * 1000));
+        $('#perfinfo').html(d[1] + 'ms, ' + new Date(d[0]));
       })
       .on("mouseout", function() {
         $('#perfinfo').html('&nbsp;');
