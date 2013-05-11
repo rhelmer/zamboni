@@ -57,6 +57,7 @@
     <strong>{{ _('Review This App') }}</strong>
     <ul>
       <li><a href="#more-about">{{ _('More Information') }}</a></li>
+      <li><a href="#performance">{{ _('Performance History') }}</a></li>
       <li><a href="#history">{{ _('App History') }}</a></li>
       <li><a href="#review-actions">{{ _('Resolution') }}</a></li>
     </ul>
@@ -73,6 +74,12 @@
   {% endif %}
 </section>
 
+  <div id="performance" class="island alpha c">
+    <h3>
+      {{ _('Performance History') }}
+    </h3>
+    <div id="content"></div>
+  </div>
   <div id="history" class="island alpha c">
     <div id="review-files-header">
       <h3>
