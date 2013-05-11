@@ -44,7 +44,7 @@ $(function() {
                     series.last_value = value.avg;
                 }
 
-                series.data.push([value.date_run, value.avg]);
+                series.data.push([value.date_run * 1000, value.avg]);
             }
         });
 
@@ -66,7 +66,7 @@ function graph(series) {
       , height = 400 - margin.top - margin.bottom;
 
     var x = d3.time.scale()
-              .domain([series.min_date, series.max_date])
+              .domain([series.min_date * 1000, series.max_date * 1000])
               .range([ 0, width ]);
     
     var y = d3.scale.linear()
