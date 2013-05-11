@@ -39,10 +39,11 @@ $(function() {
         });
 
         if (series.last_value >= max_time) {
-            console.log('warning - last test run took longer than ' +
-                        max_time + 'ms');
+            $('#perfwarning').html('warning - last test run took longer than ' +
+                                   max_time + 'ms');
         }
 
+        $('#perfloading').hide();
         graph(series);
     });
 });
@@ -104,9 +105,9 @@ function graph(series) {
       .attr("cy", function (d) { return y(d[1]); } )
       .attr("r", 5)
       .on("mouseover", function(d) {
-        $('.info').html(d[1] + 'ms, ' + new Date(d[0] * 1000));
+        $('#perfinfo').html(d[1] + 'ms, ' + new Date(d[0] * 1000));
       })
       .on("mouseout", function() {
-        $('.info').html('&nbsp;');
+        $('#perfinfo').html('&nbsp;');
       });
 }
