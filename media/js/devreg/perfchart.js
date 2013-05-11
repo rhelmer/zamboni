@@ -20,9 +20,7 @@ $(function() {
                       min_date: undefined, max_date: undefined,
                       last_value: undefined};
 
-        console.log(data);
         $.each(data, function(index, value) {
-            console.log(value.page_id);
             if (value.page_id == page_id) {
                 if (value.avg > series.max || series.max == undefined) {
                     series.max = value.avg;
