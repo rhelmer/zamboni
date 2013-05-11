@@ -4,7 +4,7 @@ $(function() {
     var page_id = 34,
         max_time = 100;
 
-    $.getJSON('data/test_values.json', function(data) {
+    $.getJSON('https://datazilla.mozilla.org/b2g/testdata/test_values?branch=master&test_ids=2,3,4,5,6,7,8,9,10,11,12,16,19,20,21,24&page_name=cold_load_time&range=7', function(data) {
         // "page_id" is actually the test id
         var series = {data: [], max: undefined, min: undefined,
                       min_date: undefined, max_date: undefined,
@@ -39,14 +39,10 @@ $(function() {
         });
 
         if (series.last_value >= max_time) {
-            $().toastmessage('showToast', {
-                text: 'warning - last test run took longer than ' +
-                      max_time + 'ms',
-                sticky: true
-            });
+            console.log('warning - last test run took longer than ' +
+                        max_time + 'ms');
         }
 
-        $('#loadingChart').hide();
         graph(series);
     });
 });
@@ -55,8 +51,8 @@ function graph(series) {
     var data = series.data;
 
     var margin = {top: 20, right: 15, bottom: 60, left: 60}
-      , width = 960 - margin.left - margin.right
-      , height = 500 - margin.top - margin.bottom;
+      , width = 660 - margin.left - margin.right
+      , height = 300 - margin.top - margin.bottom;
 
     var x = d3.time.scale()
               .domain([series.min_date, series.max_date])
@@ -66,7 +62,7 @@ function graph(series) {
               .domain([0, d3.max(data, function(d) { return d[1]; })])
               .range([ height, 0 ]);
  
-    var chart = d3.select('body')
+    var chart = d3.select('#perfchart')
     .append('svg:svg')
     .attr('width', width + margin.right + margin.left)
     .attr('height', height + margin.top + margin.bottom)

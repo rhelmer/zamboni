@@ -78,7 +78,26 @@
     <h3>
       {{ _('Performance History') }}
     </h3>
-    <div id="content"></div>
+<style>
+.chart {
+
+}
+
+.main text {
+        font: 10px sans-serif;
+}
+
+.axis line, .axis path {
+    shape-rendering: crispEdges;
+    stroke: black;
+    fill: none;
+}
+
+circle {
+    fill: steelblue;
+}
+</style>
+    <div id="perfchart"></div>
   </div>
   <div id="history" class="island alpha c">
     <div id="review-files-header">
