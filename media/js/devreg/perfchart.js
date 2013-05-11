@@ -1,16 +1,28 @@
 $(function() {
 
     // FIXME get this from datazilla pages JSON, 34 is "cold_load_time" test
-    var page_id = 34,
-        max_time = 100;
+    var page_id = 16,
+        max_time = 100,
+        branch = 'master',
+        // browser app
+        test_id = 2,
+        page_name = 'cold_load_time';
+        range = 7;
 
-    $.getJSON('https://datazilla.mozilla.org/b2g/testdata/test_values?branch=master&test_ids=2,3,4,5,6,7,8,9,10,11,12,16,19,20,21,24&page_name=cold_load_time&range=7', function(data) {
+    datazilla_url = 'https://datazilla.mozilla.org/b2g/testdata/test_values' +
+                    '?branch=master' +
+                    '&test_ids=' + test_id +
+                    '&page_name=' + page_name +
+                    '&range=' + range;
+    $.getJSON(datazilla_url, function(data) {
         // "page_id" is actually the test id
         var series = {data: [], max: undefined, min: undefined,
                       min_date: undefined, max_date: undefined,
                       last_value: undefined};
 
+        console.log(data);
         $.each(data, function(index, value) {
+            console.log(value.page_id);
             if (value.page_id == page_id) {
                 if (value.avg > series.max || series.max == undefined) {
                     series.max = value.avg;
@@ -52,8 +64,8 @@ function graph(series) {
     var data = series.data;
 
     var margin = {top: 20, right: 15, bottom: 60, left: 60}
-      , width = 660 - margin.left - margin.right
-      , height = 300 - margin.top - margin.bottom;
+      , width = 600 - margin.left - margin.right
+      , height = 400 - margin.top - margin.bottom;
 
     var x = d3.time.scale()
               .domain([series.min_date, series.max_date])

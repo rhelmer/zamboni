@@ -74,17 +74,14 @@
   {% endif %}
 </section>
 
-  <div id="performance" class="island alpha c">
-    <h3>
-      {{ _('Performance History') }}
-    </h3>
 <style>
-.chart {
-
+#performance{
+    min-width: 588px;
+    min-height: 500px;
 }
 
 .main text {
-        font: 10px sans-serif;
+    font: 10px sans-serif;
 }
 
 .axis line, .axis path {
@@ -97,6 +94,10 @@ circle {
     fill: steelblue;
 }
 </style>
+  <div id="performance" class="island alpha c">
+    <h3>
+      {{ _('Performance History') }}
+    </h3>
     <div id="perfinfo">&nbsp;</div>
     <div id="perfwarning">&nbsp;</div>
     <div id="perfchart"></div>
