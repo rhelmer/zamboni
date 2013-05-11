@@ -67,6 +67,9 @@ CSS = {
         # Developer Log In / Registration.
         'css/devreg/login.styl',
 
+        # Performance chart.
+        'css/devreg/perfchart.styl',
+
         # Footer.
         'css/devreg/footer.styl',
     ),
