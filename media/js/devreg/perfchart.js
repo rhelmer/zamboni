@@ -53,7 +53,7 @@ $(function() {
                                    max_time + 'ms');
         }
 
-        $('#perfloading').hide();
+        $('#performance').css('background-image', 'url()');
         graph(series);
     });
 });
