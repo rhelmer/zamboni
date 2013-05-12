@@ -22,24 +22,24 @@ $(function() {
 
         $.each(data, function(index, value) {
             if (value.page_id == page_id) {
-                if (value.avg > series.max || series.max == undefined) {
+                if (value.avg > series.max || series.max === undefined) {
                     series.max = value.avg;
                 }
-                if (value.avg < series.min || series.min == undefined) {
+                if (value.avg < series.min || series.min === undefined) {
                     series.min = value.avg;
                 }
 
-                if (value.date_run > series.max_date
-                    || series.max_date == undefined) {
+                if (value.date_run > series.max_date ||
+                    series.max_date === undefined) {
                     series.max_date = value.date_run;
                 }
-                if (value.date_run < series.min_date
-                    || series.min_date == undefined) {
+                if (value.date_run < series.min_date ||
+                    series.min_date === undefined) {
                     series.min_date = value.date_run;
                 }
 
                 if (value.date_run > series.last_date ||
-                    series.last_date == undefined) {
+                    series.last_date === undefined) {
                     series.last_date = value.date_run;
                     series.last_value = value.avg;
                 }
@@ -61,9 +61,9 @@ $(function() {
 function graph(series) {
     var data = series.data;
 
-    var margin = {top: 20, right: 15, bottom: 60, left: 60}
-      , width = 600 - margin.left - margin.right
-      , height = 400 - margin.top - margin.bottom;
+    var margin = {top: 20, right: 15, bottom: 60, left: 60},
+        width = 600 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
 
     var x = d3.time.scale()
               .domain([series.min_date * 1000, series.max_date * 1000])
@@ -78,13 +78,13 @@ function graph(series) {
     .append('svg:svg')
     .attr('width', width + margin.right + margin.left)
     .attr('height', height + margin.top + margin.bottom)
-    .attr('class', 'chart')
+    .attr('class', 'chart');
 
     var main = chart.append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .attr('width', width)
     .attr('height', height)
-    .attr('class', 'main')   
+    .attr('class', 'main');
         
     // draw the x axis
     var xAxis = d3.svg.axis()
