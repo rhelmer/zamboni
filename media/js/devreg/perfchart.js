@@ -106,18 +106,18 @@ function graph(series) {
     .attr('class', 'main axis date')
     .call(yAxis);
 
-    var g = main.append("svg:g"); 
+    var g = main.append('svg:g'); 
     
-    g.selectAll("scatter-dots")
+    g.selectAll('scatter-dots')
       .data(data)
-      .enter().append("svg:circle")
-      .attr("cx", function (d,i) { return x(d[0]); } )
-      .attr("cy", function (d) { return y(d[1]); } )
-      .attr("r", 5)
-      .on("mouseover", function(d) {
+      .enter().append('svg:circle')
+      .attr('cx', function (d,i) { return x(d[0]); } )
+      .attr('cy', function (d) { return y(d[1]); } )
+      .attr('r', 5)
+      .on('mouseover', function(d) {
         $('#perfinfo').html(d[1] + 'ms, ' + new Date(d[0]));
       })
-      .on("mouseout", function() {
+      .on('mouseout', function() {
         $('#perfinfo').html('&nbsp;');
       });
 }
