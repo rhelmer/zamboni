@@ -68,12 +68,12 @@ function graph(series) {
     var x = d3.time.scale()
               .domain([series.min_date * 1000, series.max_date * 1000])
               .range([ 0, width ]);
-    
+
     var y = d3.scale.linear()
-              .domain([d3.min(data, function(d) { return d[1]; }), 
+              .domain([d3.min(data, function(d) { return d[1]; }),
                        d3.max(data, function(d) { return d[1]; })])
               .range([ height, 0 ]);
- 
+
     var chart = d3.select('#perfchart')
     .append('svg:svg')
     .attr('width', width + margin.right + margin.left)
@@ -85,7 +85,7 @@ function graph(series) {
     .attr('width', width)
     .attr('height', height)
     .attr('class', 'main');
-        
+
     // draw the x axis
     var xAxis = d3.svg.axis()
     .scale(x)
@@ -106,8 +106,8 @@ function graph(series) {
     .attr('class', 'main axis date')
     .call(yAxis);
 
-    var g = main.append('svg:g'); 
-    
+    var g = main.append('svg:g');
+
     g.selectAll('scatter-dots')
       .data(data)
       .enter().append('svg:circle')
