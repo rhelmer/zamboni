@@ -1,6 +1,7 @@
 $(function() {
 
-    // FIXME get this from datazilla pages JSON, 34 is "cold_load_time" test
+    // TODO get this from datazilla pages JSON, 34 is "cold_load_time" test
+    // which happens to be the only test we support, for now
     var page_id = 16,
         max_time = 100,
         branch = 'master',
