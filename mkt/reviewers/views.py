@@ -863,5 +863,5 @@ def perf_startup(request, app_slug):
     """
     payload = {'appname': app_slug}
     # FIXME make eddy URL configurable
-    r = requests.post('http://localhost:5000/perf/startup', data=payload)
-    return {'uuid': r.text}
+    req = requests.post('http://localhost:5000/perf/startup', data=payload)
+    return {'uuid': req.text}
