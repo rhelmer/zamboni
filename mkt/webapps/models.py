@@ -880,12 +880,8 @@ class Webapp(Addon):
         if self.current_version:
             return self.current_version.developer_name
 
-    def perf_test(self, action='perf_test', args=None, prefix_only=False):
-        # FIXME make eddy URL configurable
-        eddy_url = 'http://localhost:5000/perf/startup?appname=%s' \
-                   % self.app_slug
-        # FIXME hit this URL from django, instead
-        return eddy_url
+    def get_perf_startup_url(self, action='perf_startup'):
+        return reverse('reviewers.perf_startup', args=[self.app_slug])
 
 class WebappIndexer(MappingType, Indexable):
     """

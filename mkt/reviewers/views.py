@@ -2,6 +2,7 @@ import collections
 import datetime
 import json
 import os
+import requests
 import sys
 import traceback
 import urllib
@@ -853,3 +854,14 @@ def attachment(request, attachment):
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
         response['Content-Length'] = os.path.getsize(full_path)
     return response
+
+@permission_required('Apps', 'Review')
+@json_view
+def perf_startup(request, app_slug):
+    """
+    Run startup performance test for this app
+    """
+    payload = {'appname': app_slug}
+    # FIXME make eddy URL configurable
+    r = requests.post('http://localhost:5000/perf/startup', data=payload)
+    return {'uuid': r.text}
