@@ -4,7 +4,9 @@
     $button.click(function(event){
         event.preventDefault();
         $.get(link, function(data) {
-            console.log('startup test queued: ' + data);
+            if (data.hasOwnProperty('uuid')) {
+                console.log('startup test queued: ' + data['uuid']);
+            }
         });
     });
 })();
