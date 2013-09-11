@@ -50,9 +50,9 @@
       <li><a href="{{ product.get_detail_url() }}" class="button">
         {{ _('View Listing') }}</a></li>
       {% if is_admin %}
-        <!-- FIXME use XHR for this -->
         <li><a href="{{ product.get_perf_startup_url() }}"
-          class="button manage">{{ _('Run Startup Tests') }}</a></li>
+             id="perf_startup" class="button manage">
+          {{ _('Run Startup Tests') }}</a></li>
         <li><a href="{{ product.get_dev_url() }}" class="button manage">
           {{ _('Edit Listing') }}</a></li>
       {% endif %}

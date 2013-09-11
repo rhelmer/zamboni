@@ -285,6 +285,7 @@ JS = {
         'js/devreg/mobile_review_actions.js',
         'js/common/fakefilefield.js',
         'js/common/formsets.js',
+        'js/devreg/perfstartup.js',
         'js/devreg/perfchart.js',
         'js/devreg/d3.min.js',
         'js/devreg/reviewers_init.js',
