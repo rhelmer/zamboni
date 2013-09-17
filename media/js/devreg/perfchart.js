@@ -1,53 +1,48 @@
 $(function() {
 
-    // TODO get this from datazilla pages JSON, 34 is "cold_load_time" test
-    // which happens to be the only test we support, for now
-    var page_id = 16,
-        max_time = 100,
-        branch = 'master',
-        // browser app
-        test_id = 2,
-        page_name = 'cold_load_time';
-        range = 7;
+    var max_time = 100, // trigger UI warning if test exceeds this
+        product = 'B2G',
+        branch = 'default',
+        test = $('#app_slug').val(),
+        page = 'cold_load_time';
 
-    datazilla_url = 'https://datazilla.mozilla.org/b2g/testdata/test_values' +
-                    '?branch=master' +
-                    '&test_ids=' + test_id +
-                    '&page_name=' + page_name +
-                    '&range=' + range;
+    datazilla_url = 'https://datazilla.allizom.org/marketapps/testdata/' +
+                    'all_data?product=' + product +
+                    '&branch=' + branch +
+                    '&test=' + test +
+                    '&page=' + page;
     $.getJSON(datazilla_url, function(data) {
-        // "page_id" is actually the test id
         var series = {data: [], max: undefined, min: undefined,
                       min_date: undefined, max_date: undefined,
                       last_value: undefined};
 
-        $.each(data, function(index, value) {
-            if (value.page_id == page_id) {
-                if (value.avg > series.max || series.max === undefined) {
-                    series.max = value.avg;
+        $.each(data['data'], function(index, value) {
+            if (value.pu == page) {
+                if (value.m > series.max || series.max === undefined) {
+                    series.max = value.m;
                 }
-                if (value.avg < series.min || series.min === undefined) {
-                    series.min = value.avg;
+                if (value.m < series.min || series.min === undefined) {
+                    series.min = value.m;
                 }
 
-                if (value.date_run > series.max_date ||
+                if (value.dr > series.max_date ||
                     series.max_date === undefined) {
-                    series.max_date = value.date_run;
+                    series.max_date = value.dr;
                 }
-                if (value.date_run < series.min_date ||
+                if (value.dr < series.min_date ||
                     series.min_date === undefined) {
-                    series.min_date = value.date_run;
+                    series.min_date = value.dr;
                 }
 
-                if (value.date_run > series.last_date ||
+                if (value.dr > series.last_date ||
                     series.last_date === undefined) {
-                    series.last_date = value.date_run;
-                    series.last_value = value.avg;
+                    series.last_date = value.dr;
+                    series.last_value = value.m;
                 }
 
-                series.data.push([value.date_run * 1000, value.avg]);
+                series.data.push([value.dr * 1000, value.m]);
             }
-        });
+       });
 
         if (series.last_value >= max_time) {
             $('#perfwarning').html('warning - last test run took longer than ' +

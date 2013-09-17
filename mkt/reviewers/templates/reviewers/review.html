@@ -18,6 +18,7 @@
     <span>{{ product.name }}</span>
   </h1>
   <p class="author">{{ _('by') }} {{ users_list(product.listed_authors) }}</p>
+  <input type="hidden" id="app_slug" value="{{ product.app_slug }}"></input>
 </header>
 
 <div id="scroll_sidebar_parent">
