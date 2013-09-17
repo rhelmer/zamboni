@@ -55,7 +55,10 @@ $(function() {
 });
 
 function graph(series) {
-    var data = series.data;
+    if (series.data.length == 0) {
+        console.log('no data yet');
+        return;
+    }
 
     var margin = {top: 20, right: 15, bottom: 60, left: 60},
         width = 600 - margin.left - margin.right,
