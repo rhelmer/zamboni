@@ -5,7 +5,12 @@
         event.preventDefault();
         $.get(link, function(data) {
             if (data.hasOwnProperty('uuid')) {
-                console.log('startup test queued: ' + data['uuid']);
+                if (data.uuid == null) {
+                    console.log('startup test already queued');
+                } else {
+                    console.log('startup test queued: ' + data['uuid']);
+                }
+                $button.addClass('disabled');
             }
         });
     });
