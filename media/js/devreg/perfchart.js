@@ -85,7 +85,6 @@ function graph(series) {
     .attr('height', height)
     .attr('class', 'main');
 
-    // draw the x axis
     var xAxis = d3.svg.axis()
     .scale(x)
     .orient('bottom');
@@ -95,7 +94,6 @@ function graph(series) {
     .attr('class', 'main axis date')
     .call(xAxis);
 
-    // draw the y axis
     var yAxis = d3.svg.axis()
     .scale(y)
     .orient('left');
