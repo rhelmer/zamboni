@@ -6,7 +6,7 @@ $(function() {
         test = $('#app_slug').val(),
         page = 'cold_load_time';
 
-    datazilla_url = 'https://datazilla.allizom.org/marketapps/testdata/' +
+    datazilla_url = 'https://datazilla.mozilla.org/marketapps/testdata/' +
                     'all_data?product=' + product +
                     '&branch=' + branch +
                     '&test=' + test +
@@ -69,8 +69,8 @@ function graph(series) {
               .range([ 0, width ]);
 
     var y = d3.scale.linear()
-              .domain([d3.min(data, function(d) { return d[1]; }),
-                       d3.max(data, function(d) { return d[1]; })])
+              .domain([d3.min(series.data, function(d) { return d[1]; }),
+                       d3.max(series.data, function(d) { return d[1]; })])
               .range([ height, 0 ]);
 
     var chart = d3.select('#perfchart')
@@ -106,7 +106,7 @@ function graph(series) {
     var g = main.append('svg:g');
 
     g.selectAll('scatter-dots')
-      .data(data)
+      .data(series.data)
       .enter().append('svg:circle')
       .attr('cx', function (d,i) { return x(d[0]); } )
       .attr('cy', function (d) { return y(d[1]); } )
