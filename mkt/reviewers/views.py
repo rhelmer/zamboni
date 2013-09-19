@@ -861,13 +861,12 @@ def perf_startup(request, app_slug):
     """
     Run startup performance test for this app
     """
-    # FIXME make eddy URL configurable
     req = requests.get(
-        'http://localhost:5000/perf/status?appname=%s' % app_slug)
+        settings.EDDY_URL + '/perf/status?appname=%s' % app_slug)
     status = req.json()
     if status['queued']:
         return {'uuid': None}
     else:
         payload = {'appname': app_slug}
-        req = requests.post('http://localhost:5000/perf/startup', data=payload)
+        req = requests.post(settings.EDDY_URL + '/perf/startup', data=payload)
         return {'uuid': req.text}

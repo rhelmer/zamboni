@@ -337,3 +337,6 @@ LOGOUT_REDIRECT_URL = '/developers/'
 
 # Name of our Commonplace repositories on GitHub.
 COMMONPLACE_REPOS = ['commbadge', 'fireplace', 'rocketfuel']
+
+# URL for eddy perf-testing service
+EDDY_URL = 'http://eddy.mozilla.org'
