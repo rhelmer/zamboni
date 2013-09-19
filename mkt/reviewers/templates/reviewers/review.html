@@ -50,7 +50,7 @@
       </li>
       <li><a href="{{ product.get_detail_url() }}" class="button">
         {{ _('View Listing') }}</a></li>
-      {% if is_admin  %}
+      {% if is_admin %}
         {% if product.is_packaged %}
         <li><a href="{{ product.get_perf_startup_url() }}"
              id="perf_startup" class="button manage">
